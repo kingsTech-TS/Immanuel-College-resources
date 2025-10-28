@@ -25,7 +25,7 @@ const databases = [
   {
     id: 2,
     name: "Science.gov",
-    category: "Multidisciplinary",
+    category: "Multidisciplinary, Mechanical Engineering",
     description:
       "A US government gateway offering one-stop access to 60+ scientific databases and over 2,200 portals across 13 federal science agencies, covering 200 million+ pages of research and technical information.",
     features: [
@@ -92,7 +92,7 @@ const databases = [
   {
     id: 5,
     name: "arXiv",
-    category: "STEM (Science, Technology, Engineering, Mathematics)",
+    category: "Mechanical Engineering, Software Engineering, Cybersecurity",
     description:
       "An open-access archive for scholarly articles in physics, mathematics, computer science, quantitative biology, finance, and related fields, providing preprints freely available to the public before formal peer review.",
     features: ["Preprints", "Full-text access", "Daily updates", "Advanced search", "Open-access"],
@@ -114,7 +114,7 @@ const databases = [
   {
     id: 6,
     name: "UNdata",
-    category: "Global Statistics",
+    category: "Global Statistics, Demography",
     description:
       "A centralized gateway to statistical databases compiled by the United Nations and its agencies, covering demographics, economics, health, education, environment, and sustainable development worldwide.",
     features: ["International datasets", "Country profiles", "Time series data", "Visualizations", "Free access"],
@@ -140,7 +140,7 @@ const databases = [
   {
     id: 8,
     name: "SSRN",
-    category: "Social Sciences",
+    category: "Sharia Law, Accounting, Treasury Management, Marketing, Taxation, Cybersecurity, Software Engineering, Nutrition, Optometry, Mechanical Engineering",
     description:
       "Repository of working papers and forthcoming articles in a wide range of disciplines including economics, law, and health sciences.",
     features: ["Preprints", "Early research", "Downloadable papers", "Author profiles"],
@@ -153,7 +153,7 @@ const databases = [
   {
     id: 9,
     name: "OAIster",
-    category: "Multidisciplinary",
+    category: "Sharia Law, Accounting, Treasury Management, Marketing, Taxation, Entrepreneurship and Innovation, Cybersecurity, Software Engineering, Nutrition, Optometry, Mechanical Engineering",
     description:
       "Union catalog of millions of records representing open access resources worldwide, maintained by OCLC.",
     features: ["Open access", "Theses & dissertations", "Archival documents", "Multilingual records"],
@@ -166,7 +166,7 @@ const databases = [
   {
     id: 10,
     name: "Europe PMC",
-    category: "Life Sciences",
+    category: "Life Sciences, Physiotherapy, Nutrition, Optometry",
     description: "European-based repository for life sciences articles, books, patents, and clinical guidelines.",
     features: ["Full-text access", "PubMed linkage", "Grant info", "Preprints"],
     subjects: ["Life Sciences", "Biomedical Sciences", "Medicine"],
@@ -178,7 +178,7 @@ const databases = [
   {
     id: 11,
     name: "EconBiz",
-    category: "Economics & Business",
+    category: "Accounting, Treasury Management, Marketing, Taxation, Demography, Entrepreneurship and Innovation,",
     description:
       "Academic search portal for economics and business studies, offering access to articles, working papers, and journals.",
     features: ["Research articles", "Open access", "Working papers", "Conference papers"],
@@ -191,7 +191,7 @@ const databases = [
   {
     id: 12,
     name: "CIA World Factbook",
-    category: "Geopolitics & Statistics",
+    category: "Geopolitics & Statistics, Demography",
     description:
       "Comprehensive source of country data including geography, demographics, government, economy, and military.",
     features: ["Country profiles", "Statistical data", "Comparative rankings", "Interactive maps"],
@@ -204,7 +204,7 @@ const databases = [
   {
     id: 13,
     name: "OATD",
-    category: "Theses & Dissertations",
+    category: "Sharia Law, Accounting, Taxation, Software Engineering, Nutrition, Optometry, Mechanical Engineering",
     description:
       "Index of graduate-level theses and dissertations freely available in full-text online from around the world.",
     features: ["Open access", "Graduate research", "Multilingual", "Global institutions"],
@@ -229,7 +229,7 @@ const databases = [
   {
     id: 15,
     name: "ScienceOpen",
-    category: "Science & Research",
+    category: "Sharia Law, Entrepreneurship and Innovation, Cybersecurity, Software Engineering, Nutrition, Optometry, Mechanical Engineering",
     description:
       "Research and publishing platform providing open access content and peer review across all areas of science.",
     features: ["Open access", "Peer review", "Research metrics", "Networking"],
@@ -305,7 +305,7 @@ const databases = [
   {
     id: 21,
     name: "Research4Life",
-    category: "Health, Agriculture, Environment, Law",
+    category: "Sharia Law, Accounting, Treasury Management, Marketing, Taxation, Demography, Entrepreneurship and Innovation, Cybersecurity, Software Engineering, Nutrition, Optometry, Mechanical Engineering",
     description:
       "Provides access to five research programs (HINARI, AGORA, OARE, ARDI, and GOALI) supporting research in health, agriculture, environmental science, development, innovation, and law in developing countries.",
     features: [
@@ -362,7 +362,7 @@ const databases = [
   {
     id: 25,
     name: "DOAJ",
-    category: "Open Access Journals",
+    category: "Accounting, Marketing, Entrepreneurship and Innovation",
     description:
       "The Directory of Open Access Journals (DOAJ) is an online index that provides access to high-quality, peer-reviewed open access journals from around the world.",
     features: ["Free access", "Peer-reviewed journals", "Multidisciplinary", "Advanced search tools"],
@@ -456,7 +456,7 @@ const databases = [
 {
   id: 29,
   name: "HINARI",
-  category: "Health Research Access Program",
+  category: "Accounting, Treasury Management, Marketing, Taxation, Demography, Entrepreneurship and Innovation, Cybersecurity, Software Engineering, Nutrition, Optometry, Mechanical Engineering, Physiotherapy",
   description:
     "HINARI (Health InterNetwork Access to Research Initiative) provides access to thousands of journals, books, and databases in biomedical and health sciences for institutions in low- and middle-income countries.",
   features: [
@@ -483,7 +483,7 @@ const databases = [
 {
   id: 30,
   name: "AGORA",
-  category: "Agricultural Research Access Program",
+  category: "Sharia Law, Accounting, Treasury Management, Marketing, Taxation, Demography, Entrepreneurship and Innovation, Cybersecurity, Software Engineering, Nutrition, Optometry, Mechanical Engineering, Physiotherapy",
   description:
     "AGORA (Access to Global Online Research in Agriculture) provides access to scientific research in agriculture, food, nutrition, environment, and related biological and social sciences for developing countries.",
   features: [
@@ -523,7 +523,7 @@ const databases = [
     "Environmental Science",
     "Ecology",
     "Sustainability",
-    "Earth Science"
+    "Earth Science",
   ],
   logo: "Oar.PNG",
   url: "https://www.unep.org/topics/environment-under-review/digital-library/online-access-research-environment-oare",
@@ -577,7 +577,8 @@ const databases = [
     "Law",
     "Social Sciences",
     "Economics",
-    "Political Science"
+    "Political Science",
+    "Accounting"
   ],
   logo: "Goali.PNG",
   url: "https://www.research4life.org/goali/",
@@ -592,7 +593,7 @@ const databases = [
 {
     id: 34,
     name: "ScienceDirect",
-    category: "Multidisciplinary / Scientific & Technical",
+    category: "Accounting, Treasury Management, Marketing, Taxation, Demography, Cybersecurity, Software Engineering, Nutrition, Optometry, Physiotherapy",
     description:
         "Elsevier’s flagship platform for scientific, technical, and medical research — offering access to peer-reviewed journals, book chapters, and more across many disciplines.",
     features: ["Full-text journals & articles", "Book chapters & reference works", "Advanced search & filtering", "Research topic pages / insights"],
@@ -610,19 +611,20 @@ const databases = [
 
 const categories = [
   "All",
-  "Multidisciplinary",
-  "Medical & Life Sciences",
-  "Engineering & Technology",
-  "Science & Technology",
-  "Social Sciences & Humanities",
-  "Social Sciences",
-  "Academic Publishing",
-  "History & Journalism",
-  "Geopolitics & Statistics",
-  "Economics & Business",
-  "Theses & Dissertations",
-  "Astronomy & Astrophysics",
-  "Life Sciences",
+  "Accounting",
+  "Treasury Management",
+  "Criminology",
+  "Marketing",
+  "Taxation",
+  "Sharia Law",
+  "Demography",
+  "Entrepreneurship and Innovation",
+  "Physiotherapy",
+  "Cybersecurity",
+  "Software Engineering",
+  "Nutrition",
+  "Optometry",
+  "Mechanical",
 ]
 
 export default function EResourcesPage() {
@@ -637,14 +639,25 @@ export default function EResourcesPage() {
     restDelta: 0.001,
   })
 
-  const filteredDatabases = databases.filter((db) => {
-    const matchesCategory = selectedCategory === "All" || db.category === selectedCategory
-    const matchesSearch =
-      db.name.toLowerCase().includes(searchTerm.toLowerCase()) ||
-      db.description.toLowerCase().includes(searchTerm.toLowerCase()) ||
-      db.subjects.some((subject) => subject.toLowerCase().includes(searchTerm.toLowerCase()))
-    return matchesCategory && matchesSearch
-  })
+ const filteredDatabases = databases.filter((db) => {
+  const matchesCategory =
+    selectedCategory === "All" ||
+    db.category.toLowerCase().includes(selectedCategory.toLowerCase()) ||
+    db.subjects.some((subject) =>
+      subject.toLowerCase().includes(selectedCategory.toLowerCase())
+    )
+
+  const matchesSearch =
+    db.name.toLowerCase().includes(searchTerm.toLowerCase()) ||
+    db.description.toLowerCase().includes(searchTerm.toLowerCase()) ||
+    db.subjects.some((subject) =>
+      subject.toLowerCase().includes(searchTerm.toLowerCase())
+    )
+
+  return matchesCategory && matchesSearch
+})
+
+
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-emerald-50 via-green-50 to-teal-50">
@@ -886,9 +899,9 @@ function DatabaseCard({ database, index }: { database: any; index: number }) {
             <div className="bg-white/20 backdrop-blur-sm rounded-lg p-3">
               <img src={database.logo || "/placeholder.svg"} alt={`${database.name} logo`} className="h-12 w-auto" />
             </div>
-            <span className="bg-emerald-200 text-green-800 px-3 py-1 rounded-full text-sm font-medium">
+            {/* <span className="bg-emerald-200 text-green-800 px-3 py-1 rounded-full text-sm font-medium">
               {database.category}
-            </span>
+            </span> */}
           </div>
           <h3 className="text-2xl font-bold mb-2 text-emerald-200">{database.name}</h3>
           <p className="text-white/90 leading-relaxed">{database.description}</p>
