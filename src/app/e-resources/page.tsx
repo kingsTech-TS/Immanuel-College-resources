@@ -1,9 +1,10 @@
 "use client"
 
-import { useState } from "react"
+import { useEffect, useRef, useState } from "react"
 import { motion, useScroll, useSpring } from "framer-motion"
 import { ArrowUpRight, Check, Database, ExternalLink, Search, X } from "lucide-react"
 import { Button } from "@/components/ui/button"
+import { Skeleton } from "@/components/ui/skeleton"
 import Footer from "@/components/footer"
 import ScrollToTop from "@/components/scroll-to-top"
 import Image from "next/image"
@@ -880,6 +881,34 @@ export default function EResourcesPage() {
   )
 }
 
+// Logo tile that shows a shimmer until the image has loaded (or failed)
+function CardLogo({ src, alt }: { src: string; alt: string }) {
+  const [loaded, setLoaded] = useState(false)
+  const imgRef = useRef<HTMLImageElement>(null)
+
+  // A cached image can finish loading before React attaches onLoad
+  useEffect(() => {
+    if (imgRef.current?.complete) setLoaded(true)
+  }, [])
+
+  return (
+    <div className="relative grid h-16 w-16 shrink-0 place-items-center overflow-hidden rounded-xl bg-surface p-2 ring-1 ring-border">
+      {!loaded && <Skeleton className="absolute inset-0 rounded-none" />}
+      <img
+        ref={imgRef}
+        src={src}
+        alt={alt}
+        loading="lazy"
+        onLoad={() => setLoaded(true)}
+        onError={() => setLoaded(true)}
+        className={`relative max-h-full max-w-full object-contain transition-opacity duration-300 ${
+          loaded ? "opacity-100" : "opacity-0"
+        }`}
+      />
+    </div>
+  )
+}
+
 function DatabaseCard({ database, index }: { database: Resource; index: number }) {
   return (
     <motion.article
@@ -895,14 +924,7 @@ function DatabaseCard({ database, index }: { database: Resource; index: number }
       <div className="flex flex-1 flex-col p-6">
         {/* Identity */}
         <div className="flex items-center gap-4">
-          <div className="grid h-16 w-16 shrink-0 place-items-center rounded-xl bg-surface p-2 ring-1 ring-border">
-            <img
-              src={`/${database.logo}`}
-              alt={`${database.name} logo`}
-              className="max-h-full max-w-full object-contain"
-              loading="lazy"
-            />
-          </div>
+          <CardLogo src={`/${database.logo}`} alt={`${database.name} logo`} />
           <div className="min-w-0">
             <h3 className="text-lg font-semibold leading-snug text-navy">{database.name}</h3>
             <p className="mt-0.5 truncate text-xs font-semibold uppercase tracking-wider text-gold-700">

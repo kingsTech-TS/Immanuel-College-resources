@@ -97,10 +97,76 @@
     display: none;
   }
 
+  /* Skeleton placeholders: a pale block that gently pulses while a bright
+     highlight sweeps across it.
+     .skeleton for light surfaces, .skeleton-dark for the navy header/hero.
+     The element needs position + overflow-hidden (the Skeleton component adds them). */
+  .skeleton,
+  .skeleton-dark {
+    isolation: isolate;
+    animation: skeleton-pulse 1.8s ease-in-out infinite;
+    animation-delay: var(--skeleton-delay, 0s);
+  }
+  .skeleton {
+    background-color: var(--color-navy-100);
+    --skeleton-shine: rgb(255 255 255 / 0.75);
+  }
+  .skeleton-dark {
+    background-color: rgb(255 255 255 / 0.1);
+    --skeleton-shine: rgb(255 255 255 / 0.22);
+  }
+  .skeleton::after,
+  .skeleton-dark::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    transform: translateX(-100%);
+    background-image: linear-gradient(
+      100deg,
+      transparent 20%,
+      var(--skeleton-shine) 50%,
+      transparent 80%
+    );
+    animation: skeleton-shimmer 1.4s ease-in-out infinite;
+    animation-delay: var(--skeleton-delay, 0s);
+  }
+
   /* Faint dot grid used on the navy hero */
   .bg-dots {
     background-image: radial-gradient(rgb(255 255 255 / 0.07) 1px, transparent 1px);
     background-size: 22px 22px;
+  }
+}
+
+@keyframes skeleton-shimmer {
+  0% {
+    transform: translateX(-100%);
+  }
+  100% {
+    transform: translateX(100%);
+  }
+}
+
+@keyframes skeleton-pulse {
+  0%,
+  100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.6;
+  }
+}
+
+/* Reduced motion: drop the sweeping highlight, keep a slow, gentle pulse */
+@media (prefers-reduced-motion: reduce) {
+  .skeleton::after,
+  .skeleton-dark::after {
+    animation: none;
+    display: none;
+  }
+  .skeleton,
+  .skeleton-dark {
+    animation-duration: 2.8s;
   }
 }
 
