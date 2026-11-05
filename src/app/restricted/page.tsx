@@ -134,8 +134,8 @@ export default function RestrictedPage() {
 
           <InfoCard icon={MessageCircle} title="Need help?">
             <ul className="space-y-1.5">
-              {contacts.map(({ icon: Icon, label, href }) => (
-                <li key={label}>
+              {contacts.map(({ icon: Icon, label, href }, i) => (
+                <li key={`${i}-${href}`}>
                   <a
                     href={href}
                     className="group/link flex items-center gap-2.5 rounded-lg px-2 py-1.5 -mx-2 text-navy-700 transition-colors hover:bg-navy-50 hover:text-navy"

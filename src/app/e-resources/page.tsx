@@ -4,6 +4,8 @@ import { useState } from "react"
 import { motion, useScroll, useSpring } from "framer-motion"
 import { ArrowUpRight, Check, Database, ExternalLink, Search, X } from "lucide-react"
 import { Button } from "@/components/ui/button"
+import Footer from "@/components/footer"
+import ScrollToTop from "@/components/scroll-to-top"
 import Image from "next/image"
 import Link from "next/link"
 
@@ -871,6 +873,9 @@ export default function EResourcesPage() {
           </motion.div>
         )}
       </main>
+
+      <Footer />
+      <ScrollToTop />
     </div>
   )
 }
