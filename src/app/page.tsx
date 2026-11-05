@@ -5,7 +5,7 @@ import ScrollToTop from "@/components/scroll-to-top"
 
 export default function HomePage() {
   return (
-    <div className="min-h-screen bg-white">
+    <div className="min-h-screen bg-surface">
       <main>
       <Source />
       </main>

@@ -47,7 +47,8 @@ export default function ScrollToTop() {
             <Button
               onClick={scrollToTop}
             
-              className="w-14 h-14 rounded-full bg-gradient-to-r from-[#D7B56D] to-[#0B622F]  hover:to-[#2B2A29] cursor-pointer text-white shadow-lg hover:shadow-xl transition-all duration-300 p-0"
+              aria-label="Back to top"
+              className="w-12 h-12 rounded-full bg-navy text-gold ring-1 ring-gold/40 cursor-pointer shadow-lift hover:bg-gold hover:text-navy transition-colors duration-300 p-0"
             >
               <motion.div
                 animate={{ y: [0, -2, 0] }}
@@ -60,12 +61,12 @@ export default function ScrollToTop() {
 
           {/* Tooltip */}
           <motion.div
-            className="absolute bottom-full right-0 mb-2 px-3 py-1 bg-gray-900 text-white text-sm rounded-lg opacity-0 pointer-events-none"
+            className="absolute bottom-full right-0 mb-2 px-3 py-1 bg-navy-900 text-white text-sm rounded-lg opacity-0 pointer-events-none"
             whileHover={{ opacity: 1 }}
             transition={{ duration: 0.2 }}
           >
             Back to top
-            <div className="absolute top-full right-4 w-0 h-0 border-l-4 border-r-4 border-t-4 border-transparent border-t-gray-900"></div>
+            <div className="absolute top-full right-4 w-0 h-0 border-l-4 border-r-4 border-t-4 border-transparent border-t-navy-900"></div>
           </motion.div>
         </motion.div>
       )}

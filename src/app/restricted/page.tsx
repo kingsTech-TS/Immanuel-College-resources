@@ -2,284 +2,207 @@
 
 import { useEffect, useState } from "react"
 import { motion } from "framer-motion"
-import {
-  Shield,
-  Lock,
-  AlertTriangle,
-  ArrowLeft,
-  Wifi,
-  MapPin,
-  Clock,
-  Users,
-  Contact2,
-  PhoneCall,
-  Send,
-  MessageCircle,
-} from "lucide-react"
-import { Button } from "@/components/ui/button"
+import { ArrowLeft, ArrowUpRight, Clock, Lock, Mail, MapPin, MessageCircle, Phone, ShieldCheck } from "lucide-react"
+import Image from "next/image"
 import Link from "next/link"
+import Footer from "@/components/footer"
+
+const contacts = [
+  { icon: Mail, label: "registry@immanuelcollege.edu.ng", href: "mailto:kdl.ui@gmail.com" },
+  { icon: Phone, label: "+234 800 123 4567", href: "tel:+2349032193358" },
+  { icon: MessageCircle, label: "+234 800 123 4567", href: "tel:+2348150607963" },
+]
+
+const MAPS_URL = "https://www.google.com/maps/search/?api=1&query=Immanuel+College+of+Theology+Ibadan"
+
+const fadeUp = {
+  initial: { opacity: 0, y: 24 },
+  animate: { opacity: 1, y: 0 },
+}
 
 export default function RestrictedPage() {
-  const [mounted, setMounted] = useState(false)
-  const [currentTime, setCurrentTime] = useState(new Date())
-  const [showContacts, setShowContacts] = useState(false)
+  // Rendered only after mount so server and client markup match
+  const [now, setNow] = useState<Date | null>(null)
 
   useEffect(() => {
-    setMounted(true)
-    const timer = setInterval(() => setCurrentTime(new Date()), 1000)
+    setNow(new Date())
+    const timer = setInterval(() => setNow(new Date()), 1000)
     return () => clearInterval(timer)
   }, [])
 
-  if (!mounted) return null
-
-  const screenWidth = typeof window !== "undefined" ? window.innerWidth : 1920
-  const screenHeight = typeof window !== "undefined" ? window.innerHeight : 1080
-
   return (
-    <div className="min-h-screen bg-gradient-to-br from-gray-900 via-blue-900 to-gray-900 relative overflow-hidden px-4 sm:px-6 lg:px-8">
-      {/* Animated Background Elements */}
-      <div className="absolute inset-0 overflow-hidden">
-        {[...Array(20)].map((_, i) => (
-          <motion.div
-            key={i}
-            className="absolute w-2 h-2 bg-red-400/20 rounded-full"
-            initial={{
-              x: Math.random() * screenWidth,
-              y: Math.random() * screenHeight,
-            }}
-            animate={{
-              x: Math.random() * screenWidth,
-              y: Math.random() * screenHeight,
-            }}
-            transition={{
-              duration: Math.random() * 10 + 10,
-              repeat: Infinity,
-              ease: "linear",
-            }}
-          />
-        ))}
-        {/* Pulsing Circles */}
-        <motion.div
-          className="absolute top-1/4 left-1/4 w-64 h-64 sm:w-96 sm:h-96 bg-red-500/10 rounded-full blur-3xl"
-          animate={{ scale: [1, 1.2, 1], opacity: [0.3, 0.6, 0.3] }}
-          transition={{ duration: 4, repeat: Infinity, ease: "easeInOut" }}
-        />
-        <motion.div
-          className="absolute bottom-1/4 right-1/4 w-52 h-52 sm:w-80 sm:h-80 bg-orange-500/10 rounded-full blur-3xl"
-          animate={{ scale: [1.2, 1, 1.2], opacity: [0.6, 0.3, 0.6] }}
-          transition={{ duration: 5, repeat: Infinity, ease: "easeInOut" }}
-        />
-        <div className="absolute inset-0 bg-[linear-gradient(rgba(255,255,255,0.02)_1px,transparent_1px),linear-gradient(90deg,rgba(255,255,255,0.02)_1px,transparent_1px)] bg-[size:50px_50px]" />
-      </div>
-
+    <div className="min-h-screen flex flex-col bg-surface">
       {/* Header */}
-      <motion.header
-        className="relative z-10 py-6"
-        initial={{ y: -100, opacity: 0 }}
-        animate={{ y: 0, opacity: 1 }}
-        transition={{ duration: 0.8, ease: "easeOut" }}
-      >
-        <Link href="/e-resources">
-          <Button variant="ghost" className="text-white hover:bg-white/10 border border-white/20 cursor-pointer">
-            <ArrowLeft className="h-4 w-4 mr-2" />
-            Back to Home
-          </Button>
-        </Link>
-      </motion.header>
+      <header className="sticky top-0 z-40 bg-navy/95 backdrop-blur-md border-b border-white/10">
+        <div className="container mx-auto px-4 sm:px-6 lg:px-8 h-16 sm:h-20 flex items-center justify-between gap-4">
+          <Link href="/" className="flex items-center gap-4 min-w-0">
+            <Image
+              src="/logo/logo.png"
+              alt="Immanuel College of Theology, Ibadan"
+              width={867}
+              height={174}
+              priority
+              className="h-8 sm:h-11 w-auto object-contain shrink-0"
+            />
+            <span className="hidden lg:block h-8 w-px bg-white/20" aria-hidden />
+            <span className="hidden lg:block text-xs font-medium uppercase tracking-[0.18em] text-gold-300 whitespace-nowrap">
+              Library · E-Resources
+            </span>
+          </Link>
 
-      {/* Main Content */}
-      <div className="relative z-10 flex items-center justify-center min-h-[calc(100vh-140px)]">
-        <div className="max-w-5xl w-full mx-auto text-center">
-          {/* Animated Shield */}
+          <Link
+            href="/e-resources"
+            className="inline-flex shrink-0 items-center gap-1.5 rounded-full border border-gold/40 bg-gold/10 px-4 py-2 text-sm font-medium text-gold-100 transition-colors hover:bg-gold hover:text-navy hover:border-gold"
+          >
+            <ArrowLeft className="h-4 w-4" />
+            Back to resources
+          </Link>
+        </div>
+      </header>
+
+      {/* Hero */}
+      <section className="relative overflow-hidden bg-navy text-white">
+        <Image
+          src="/hero/hero.jpg"
+          alt=""
+          fill
+          priority
+          sizes="100vw"
+          className="object-cover object-[center_60%]"
+        />
+        <div className="absolute inset-0 bg-gradient-to-b from-navy/85 via-navy/75 to-navy" aria-hidden />
+        <div className="absolute inset-0 bg-gradient-to-r from-navy/60 via-transparent to-navy/60" aria-hidden />
+        <div className="absolute inset-0 bg-dots" aria-hidden />
+        <div className="absolute -top-40 right-[-10%] h-[30rem] w-[30rem] rounded-full bg-gold/20 blur-3xl" aria-hidden />
+        <div className="absolute -bottom-48 -left-32 h-[26rem] w-[26rem] rounded-full bg-navy-500/40 blur-3xl" aria-hidden />
+
+        <div className="relative container mx-auto px-4 sm:px-6 lg:px-8 pt-16 pb-32 md:pt-20 md:pb-40 text-center">
+          {/* Emblem */}
           <motion.div
-            className="relative mb-12"
-            initial={{ scale: 0, rotate: -180 }}
-            animate={{ scale: 1, rotate: 0 }}
-            transition={{ duration: 1, ease: "easeOut", delay: 0.3 }}
+            className="relative mx-auto mb-8 h-24 w-24 sm:h-28 sm:w-28"
+            initial={{ opacity: 0, scale: 0.8 }}
+            animate={{ opacity: 1, scale: 1 }}
+            transition={{ duration: 0.6, ease: "easeOut" }}
           >
             <motion.div
-              className="relative inline-block"
-              animate={{ y: [0, -10, 0] }}
-              transition={{ duration: 3, repeat: Infinity, ease: "easeInOut" }}
-            >
-              <motion.div
-                className="absolute inset-0 w-24 h-24 sm:w-32 sm:h-32 mx-auto"
-                animate={{ rotate: 360 }}
-                transition={{ duration: 20, repeat: Infinity, ease: "linear" }}
-              >
-                <div className="w-full h-full border-2 border-red-400/30 rounded-full border-dashed" />
-              </motion.div>
-
-              <motion.div
-                className="relative w-24 h-24 sm:w-32 sm:h-32 mx-auto bg-gradient-to-br from-blue-500 to-blue-700 rounded-full flex items-center justify-center shadow-2xl"
-                animate={{
-                  boxShadow: [
-                    "0 0 20px rgba(239, 68, 68, 0.5)",
-                    "0 0 40px rgba(239, 68, 68, 0.8)",
-                    "0 0 20px rgba(239, 68, 68, 0.5)",
-                  ],
-                }}
-                transition={{ duration: 2, repeat: Infinity, ease: "easeInOut" }}
-              >
-                <Shield className="h-12 w-12 sm:h-16 sm:w-16 text-white" />
-              </motion.div>
-
-              {[Lock, AlertTriangle, Wifi].map((Icon, index) => (
-                <motion.div
-                  key={index}
-                  className="absolute w-6 h-6 sm:w-8 sm:h-8 bg-white/10 backdrop-blur-sm rounded-full flex items-center justify-center border border-white/20"
-                  style={{ top: "50%", left: "50%", transformOrigin: "0 0" }}
-                  animate={{ rotate: 360 }}
-                  transition={{ duration: 8 + index * 2, repeat: Infinity, ease: "linear" }}
-                  initial={{ x: 60 + index * 20, y: -12 }}
-                >
-                  <Icon className="h-4 w-4 text-white" />
-                </motion.div>
-              ))}
-            </motion.div>
+              className="absolute inset-0 rounded-full border border-dashed border-gold/40"
+              animate={{ rotate: 360 }}
+              transition={{ duration: 30, repeat: Infinity, ease: "linear" }}
+              aria-hidden
+            />
+            <div className="absolute inset-3 grid place-items-center rounded-full bg-gradient-to-br from-navy-600 to-navy-900 ring-1 ring-gold/50 shadow-[0_0_40px_-6px_rgb(196_154_69/0.55)]">
+              <ShieldCheck className="h-10 w-10 sm:h-12 sm:w-12 text-gold" />
+            </div>
           </motion.div>
 
-          {/* Main Text */}
-          <motion.div
-            initial={{ opacity: 0, y: 50 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8, delay: 0.6 }}
-          >
-            <h1 className="text-4xl sm:text-6xl md:text-7xl lg:text-8xl font-bold text-white mb-6">
-              Visit the{" "}
-              <motion.span
-                className="text-transparent bg-clip-text bg-gradient-to-r from-red-400 via-orange-400 to-red-400 inline-block"
-                animate={{ backgroundPosition: ["0% 50%", "100% 50%", "0% 50%"] }}
-                transition={{ duration: 3, repeat: Infinity, ease: "easeInOut" }}
-                style={{ backgroundSize: "200% 200%" }}
-              >
-                Library
-              </motion.span>
+          <motion.div {...fadeUp} transition={{ duration: 0.6, delay: 0.1, ease: "easeOut" }}>
+            <span className="inline-flex items-center gap-2 rounded-full border border-gold/30 bg-gold/10 px-4 py-1.5 text-[11px] sm:text-xs font-semibold uppercase tracking-[0.2em] text-gold-200">
+              <Lock className="h-3.5 w-3.5" />
+              On-site access only
+            </span>
+
+            <h1 className="mt-6 text-4xl sm:text-5xl md:text-6xl font-semibold tracking-tight">
+              Visit the <span className="text-gold">Library</span>
             </h1>
-            <p className="text-lg sm:text-xl md:text-2xl text-gray-300 mb-12 font-light">
-              This resource is only accessible within the{" "}
-              <span className="text-white font-semibold">Library</span>
-            </p>
-          </motion.div>
 
-          {/* Info Cards */}
-          <motion.div
-            className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6 mb-12"
-            initial={{ opacity: 0, y: 50 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8, delay: 1.2 }}
-          >
-            {/* Card 1 */}
-            <motion.div
-              className="bg-white/5 backdrop-blur-sm border border-white/10 rounded-2xl p-6 hover:bg-white/10 transition-all"
-              whileHover={{ scale: 1.05, y: -5 }}
-            >
-              <MapPin className="h-8 w-8 text-red-400 mx-auto mb-4" />
-              <h3 className="text-white font-semibold mb-2">Location Required</h3>
-              <p className="text-gray-400 text-sm">Must be present in the Library</p>
-            </motion.div>
-
-            {/* Card 2 */}
-            <motion.div
-              className="bg-white/5 backdrop-blur-sm border border-white/10 rounded-2xl p-6 hover:bg-white/10 transition-all"
-              whileHover={{ scale: 1.05, y: -5 }}
-            >
-              <Clock className="h-8 w-8 text-orange-400 mx-auto mb-4" />
-              <h3 className="text-white font-semibold mb-2">Library Hours</h3>
-              <p className="text-gray-400 text-sm">
-                {currentTime.toLocaleTimeString([], { hour: "2-digit", minute: "2-digit" })}
-              </p>
-            </motion.div>
-
-            {/* Card 3 - Contact */}
-            <motion.div
-              onClick={() => setShowContacts(!showContacts)}
-              className="cursor-pointer bg-white/5 backdrop-blur-sm border border-white/10 rounded-2xl p-6 hover:bg-white/10 transition-all relative"
-              whileHover={{ scale: 1.05, y: -5 }}
-            >
-              <Users className="h-8 w-8 text-blue-400 mx-auto mb-4" />
-              <h3 className="text-white font-semibold mb-2">Need Help?</h3>
-              <p className="text-gray-400 text-sm">Contact Library staff</p>
-
-              {showContacts && (
-                <motion.div
-                  initial={{ opacity: 0, y: 10 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  transition={{ duration: 0.3 }}
-                  className="mt-4 space-y-2 text-sm text-white"
-                >
-                  <motion.div
-                    whileHover={{ scale: 1.02 }}
-                    className="flex items-center gap-2 bg-blue-500/10 p-2 rounded-lg border border-white/10"
-                  >
-                    <Send className="w-4 h-4 text-blue-300" />
-                    <a href="mailto:library@university.edu" className="underline">
-                      kdl.ui@gmail.com
-                    </a>
-                  </motion.div>
-                  <motion.div
-                    whileHover={{ scale: 1.02 }}
-                    className="flex items-center gap-2 bg-blue-500/10 p-2 rounded-lg border border-white/10"
-                  >
-                    <PhoneCall className="w-4 h-4 text-blue-300" />
-                    <a href="tel:+1234567890" className="underline">
-                      +234 903 2193 358
-                    </a>
-                  </motion.div>
-
-                   <motion.div
-                    whileHover={{ scale: 1.02 }}
-                    className="flex items-center gap-2 bg-blue-500/10 p-2 rounded-lg border border-white/10"
-                  >
-                    <MessageCircle className="w-4 h-4 text-blue-300" />
-                    <a href="tel:+1234567890" className="underline">
-                      +234 815 0607 963
-                    </a>
-                  </motion.div>
-                </motion.div>
-              )}
-            </motion.div>
-          </motion.div>
-
-          {/* Action Buttons */}
-          <div className="flex flex-col sm:flex-row gap-4 justify-center">
-            <motion.div whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }}>
-              <Button size="lg" className="bg-gradient-to-r from-red-500 to-red-600 text-white px-8 py-4 rounded-2xl shadow-lg">
-                <MapPin className="mr-2 h-5 w-5" />
-                Find the Library
-              </Button>
-            </motion.div>
-            <motion.div whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }}>
-              <Link href="/e-resources">
-                <Button variant="outline" className="border-white/30 text-white hover:bg-white/10 px-8 py-4 rounded-2xl">
-                  Browse Other Resources
-                </Button>
-              </Link>
-            </motion.div>
-          </div>
-
-          {/* Warning */}
-          <motion.div
-            className="mt-12"
-            animate={{ opacity: [0.5, 1, 0.5] }}
-            transition={{ duration: 2, repeat: Infinity }}
-          >
-            <p className="text-gray-500 text-sm flex items-center justify-center gap-2">
-              <AlertTriangle className="h-4 w-4" />
-              This restriction is in place to comply with licensing agreements
+            <p className="mx-auto mt-5 max-w-xl text-base sm:text-lg md:text-xl leading-relaxed text-navy-100">
+              This resource is only accessible from within the Library premises.
             </p>
           </motion.div>
         </div>
-      </div>
+      </section>
 
-      {/* Animated Border */}
-      <motion.div
-        className="absolute inset-0 border-4 border-red-500/20 rounded-3xl m-4 pointer-events-none"
-        animate={{
-          borderColor: ["rgba(239, 68, 68, 0.2)", "rgba(239, 68, 68, 0.5)", "rgba(239, 68, 68, 0.2)"],
-        }}
-        transition={{ duration: 3, repeat: Infinity, ease: "easeInOut" }}
-      />
+      {/* Info cards, lifted over the hero */}
+      <main className="relative flex-1 container mx-auto px-4 sm:px-6 lg:px-8 -mt-20 md:-mt-24 pb-16">
+        <motion.div
+          className="grid grid-cols-1 md:grid-cols-3 gap-6 max-w-5xl mx-auto"
+          {...fadeUp}
+          transition={{ duration: 0.6, delay: 0.25, ease: "easeOut" }}
+        >
+          <InfoCard icon={MapPin} title="Location required">
+            <p>You must be physically present in the Library to open this database.</p>
+          </InfoCard>
+
+          <InfoCard icon={Clock} title="Current time">
+            <p className="text-2xl font-semibold tabular-nums text-navy">
+              {now ? now.toLocaleTimeString([], { hour: "2-digit", minute: "2-digit" }) : "--:--"}
+            </p>
+            <p className="mt-1">
+              {now ? now.toLocaleDateString([], { weekday: "long", day: "numeric", month: "long" }) : " "}
+            </p>
+          </InfoCard>
+
+          <InfoCard icon={MessageCircle} title="Need help?">
+            <ul className="space-y-1.5">
+              {contacts.map(({ icon: Icon, label, href }) => (
+                <li key={label}>
+                  <a
+                    href={href}
+                    className="group/link flex items-center gap-2.5 rounded-lg px-2 py-1.5 -mx-2 text-navy-700 transition-colors hover:bg-navy-50 hover:text-navy"
+                  >
+                    <Icon className="h-4 w-4 shrink-0 text-gold-600" />
+                    <span className="truncate">{label}</span>
+                  </a>
+                </li>
+              ))}
+            </ul>
+          </InfoCard>
+        </motion.div>
+
+        {/* Actions */}
+        <motion.div
+          className="mt-10 flex flex-col sm:flex-row gap-3 justify-center"
+          {...fadeUp}
+          transition={{ duration: 0.6, delay: 0.4, ease: "easeOut" }}
+        >
+          <a
+            href={MAPS_URL}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="inline-flex items-center justify-center gap-2 rounded-xl bg-navy px-6 py-3 text-sm font-medium text-white shadow-soft transition-colors hover:bg-navy-700 focus-visible:outline-none focus-visible:ring-4 focus-visible:ring-gold/40"
+          >
+            <MapPin className="h-4 w-4 text-gold" />
+            Find the Library
+            <ArrowUpRight className="h-4 w-4 text-gold" />
+          </a>
+          <Link
+            href="/e-resources"
+            className="inline-flex items-center justify-center gap-2 rounded-xl bg-white px-6 py-3 text-sm font-medium text-navy ring-1 ring-border shadow-soft transition-colors hover:ring-gold focus-visible:outline-none focus-visible:ring-4 focus-visible:ring-gold/40"
+          >
+            Browse other resources
+          </Link>
+        </motion.div>
+
+        <p className="mt-10 flex items-center justify-center gap-2 text-center text-xs text-muted-foreground">
+          <ShieldCheck className="h-4 w-4 shrink-0 text-gold-600" />
+          This restriction is in place to comply with licensing agreements.
+        </p>
+      </main>
+
+      <Footer />
+    </div>
+  )
+}
+
+function InfoCard({
+  icon: Icon,
+  title,
+  children,
+}: {
+  icon: React.ComponentType<{ className?: string }>
+  title: string
+  children: React.ReactNode
+}) {
+  return (
+    <div className="group flex flex-col overflow-hidden rounded-2xl bg-white ring-1 ring-border shadow-soft transition-[box-shadow,transform] duration-300 hover:-translate-y-1 hover:shadow-lift hover:ring-gold/50">
+      <div className="h-1 bg-gradient-to-r from-navy via-navy-600 to-gold" />
+      <div className="p-6">
+        <div className="mb-4 grid h-11 w-11 place-items-center rounded-xl bg-navy-50 ring-1 ring-navy-100 transition-colors group-hover:bg-gold-50 group-hover:ring-gold-200">
+          <Icon className="h-5 w-5 text-navy" />
+        </div>
+        <h3 className="mb-2 text-base font-semibold text-navy">{title}</h3>
+        <div className="text-sm leading-relaxed text-muted-foreground">{children}</div>
+      </div>
     </div>
   )
 }

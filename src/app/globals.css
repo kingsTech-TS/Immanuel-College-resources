@@ -1,63 +1,86 @@
 @import "tailwindcss";
 
-@layer base {
-  :root {
-    --background: 0 0% 100%;
-    --foreground: 222.2 84% 4.9%;
-    --card: 0 0% 100%;
-    --card-foreground: 222.2 84% 4.9%;
-    --popover: 0 0% 100%;
-    --popover-foreground: 222.2 84% 4.9%;
-    --primary: 221.2 83.2% 53.3%;
-    --primary-foreground: 210 40% 98%;
-    --secondary: 210 40% 96%;
-    --secondary-foreground: 222.2 84% 4.9%;
-    --muted: 210 40% 96%;
-    --muted-foreground: 215.4 16.3% 46.9%;
-    --accent: 210 40% 96%;
-    --accent-foreground: 222.2 84% 4.9%;
-    --destructive: 0 84.2% 60.2%;
-    --destructive-foreground: 210 40% 98%;
-    --border: 214.3 31.8% 91.4%;
-    --input: 214.3 31.8% 91.4%;
-    --ring: 221.2 83.2% 53.3%;
-    --radius: 0.75rem;
-    --chart-1: 12 76% 61%;
-    --chart-2: 173 58% 39%;
-    --chart-3: 197 37% 24%;
-    --chart-4: 43 74% 66%;
-    --chart-5: 27 87% 67%;
-  }
+/*
+  Brand palette
+  ─────────────
+  Navy  #142B50  primary
+  Gold  #C49A45  secondary / accent
+  White #FFFFFF  background
+  Grey  #F3F4F6  section backgrounds
 
-  .dark {
-    --background: 222.2 84% 4.9%;
-    --foreground: 210 40% 98%;
-    --card: 222.2 84% 4.9%;
-    --card-foreground: 210 40% 98%;
-    --popover: 222.2 84% 4.9%;
-    --popover-foreground: 210 40% 98%;
-    --primary: 217.2 91.2% 59.8%;
-    --primary-foreground: 222.2 84% 4.9%;
-    --secondary: 217.2 32.6% 17.5%;
-    --secondary-foreground: 210 40% 98%;
-    --muted: 217.2 32.6% 17.5%;
-    --muted-foreground: 215 20.2% 65.1%;
-    --accent: 217.2 32.6% 17.5%;
-    --accent-foreground: 210 40% 98%;
-    --destructive: 0 62.8% 30.6%;
-    --destructive-foreground: 210 40% 98%;
-    --border: 217.2 32.6% 17.5%;
-    --input: 217.2 32.6% 17.5%;
-    --ring: 224.3 76.3% 94.1%;
-    --chart-1: 220 70% 50%;
-    --chart-2: 160 60% 45%;
-    --chart-3: 30 80% 55%;
-    --chart-4: 280 65% 60%;
-    --chart-5: 340 75% 55%;
-  }
+  Tints and shades are derived from the two brand hues so every surface,
+  border and hover state stays in the same family.
+*/
+@theme {
+  --font-sans: var(--font-geist-sans), ui-sans-serif, system-ui, sans-serif;
+  --font-mono: var(--font-geist-mono), ui-monospace, monospace;
+
+  --color-navy: #142b50;
+  --color-navy-50: #eef2f8;
+  --color-navy-100: #d9e1ee;
+  --color-navy-200: #b3c2da;
+  --color-navy-300: #8299bd;
+  --color-navy-400: #5674a0;
+  --color-navy-500: #3a5784;
+  --color-navy-600: #284470;
+  --color-navy-700: #1c365f;
+  --color-navy-800: #142b50;
+  --color-navy-900: #0f2140;
+  --color-navy-950: #0a162b;
+
+  --color-gold: #c49a45;
+  --color-gold-50: #fbf7ee;
+  --color-gold-100: #f5ebd3;
+  --color-gold-200: #ebd5a8;
+  --color-gold-300: #debc79;
+  --color-gold-400: #d1a95b;
+  --color-gold-500: #c49a45;
+  --color-gold-600: #a88136;
+  --color-gold-700: #86662b;
+  --color-gold-800: #644c22;
+  --color-gold-900: #45351a;
+
+  --color-surface: #f3f4f6;
+
+  /* shadcn-style tokens used by components/ui */
+  --color-background: #ffffff;
+  --color-foreground: #142b50;
+  --color-primary: #142b50;
+  --color-primary-foreground: #ffffff;
+  --color-secondary: #c49a45;
+  --color-secondary-foreground: #142b50;
+  --color-muted: #f3f4f6;
+  --color-muted-foreground: #5b6b85;
+  --color-accent: #eef2f8;
+  --color-accent-foreground: #142b50;
+  --color-destructive: #dc2626;
+  --color-destructive-foreground: #ffffff;
+  --color-border: #e3e7ee;
+  --color-input: #dde2ea;
+  --color-ring: #c49a45;
+  --color-card: #ffffff;
+  --color-card-foreground: #142b50;
+
+  --shadow-soft: 0 1px 2px rgb(20 43 80 / 0.04), 0 4px 16px rgb(20 43 80 / 0.06);
+  --shadow-lift: 0 2px 4px rgb(20 43 80 / 0.06), 0 18px 40px -8px rgb(20 43 80 / 0.18);
 }
 
+@layer base {
+  html {
+    scroll-behavior: smooth;
+  }
 
+  body {
+    background: var(--color-background);
+    color: var(--color-foreground);
+    font-family: var(--font-sans);
+  }
+
+  ::selection {
+    background: var(--color-gold-200);
+    color: var(--color-navy-900);
+  }
+}
 
 @layer utilities {
   .line-clamp-3 {
@@ -66,85 +89,36 @@
     -webkit-box-orient: vertical;
     -webkit-line-clamp: 3;
   }
+
+  .no-scrollbar {
+    scrollbar-width: none;
+  }
+  .no-scrollbar::-webkit-scrollbar {
+    display: none;
+  }
+
+  /* Faint dot grid used on the navy hero */
+  .bg-dots {
+    background-image: radial-gradient(rgb(255 255 255 / 0.07) 1px, transparent 1px);
+    background-size: 22px 22px;
+  }
 }
 
 /* Custom scrollbar */
 ::-webkit-scrollbar {
-  width: 8px;
+  width: 10px;
 }
 
 ::-webkit-scrollbar-track {
-  background: #f1f5f9;
+  background: var(--color-surface);
 }
 
 ::-webkit-scrollbar-thumb {
-  background: linear-gradient(to bottom, #D7B56D, #0B622F);
-  border-radius: 4px;
+  background: var(--color-navy-300);
+  border-radius: 999px;
+  border: 2px solid var(--color-surface);
 }
 
 ::-webkit-scrollbar-thumb:hover {
-  background: linear-gradient(to bottom, #D7B56D, #0B622F);
-}
-
-/* Smooth scrolling */
-html {
-  scroll-behavior: smooth;
-}
-
-/* Custom animations */
-@keyframes float {
-  0%,
-  100% {
-    transform: translateY(0px);
-  }
-  50% {
-    transform: translateY(-10px);
-  }
-}
-
-.animate-float {
-  animation: float 3s ease-in-out infinite;
-}
-
-@keyframes pulse-glow {
-  0%,
-  100% {
-    box-shadow: 0 0 20px rgba(59, 130, 246, 0.3);
-  }
-  50% {
-    box-shadow: 0 0 30px rgba(59, 130, 246, 0.6);
-  }
-}
-
-.animate-pulse-glow {
-  animation: pulse-glow 2s ease-in-out infinite;
-}
-
-/* Glass morphism effect */
-.glass {
-  background: rgba(255, 255, 255, 0.1);
-  backdrop-filter: blur(10px);
-  border: 1px solid rgba(255, 255, 255, 0.2);
-}
-
-/* Gradient text */
-.gradient-text {
-  background: linear-gradient(135deg, #3b82f6, #8b5cf6, #06b6d4);
-  background-size: 200% 200%;
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  background-clip: text;
-  animation: gradient-shift 3s ease infinite;
-}
-
-@keyframes gradient-shift {
-  0% {
-    background-position: 0% 50%;
-  }
-  50% {
-    background-position: 100% 50%;
-  }
-  100% {
-    background-position: 0% 50%;
-  }
+  background: var(--color-gold-500);
 }
