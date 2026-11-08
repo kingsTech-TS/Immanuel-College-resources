@@ -10,11 +10,24 @@ import ScrollToTop from "@/components/scroll-to-top"
 import Image from "next/image"
 import Link from "next/link"
 
+// Filter options; each resource lists which of these it supports in `disciplines`
+const ALL_DISCIPLINES: string[] = [
+  "Biblical Studies",
+  "Christian Theology",
+  "Church History",
+  "Religious Studies",
+  "African Christianity",
+  "Missions",
+  "Ethics",
+  "Philosophy",
+]
+
 const databases = [
   {
     id: 1,
     name: "JSTOR",
     category: "Multidisciplinary",
+    disciplines: ALL_DISCIPLINES,
     description:
       "Digital library with thousands of academic journals, books, and primary sources across multiple disciplines including arts, sciences, and humanities.",
     features: ["Full-text articles", "Historical archives", "Primary sources", "Citation tools"],
@@ -24,11 +37,171 @@ const databases = [
     color: "from-purple-500 to-indigo-600",
     stats: { articles: "12M+", journals: "3,000+", books: "75,000+" },
   },
-
+  {
+    id: 21,
+    name: "Research4Life",
+    category: "Sharia Law, Accounting, Treasury Management, Marketing, Taxation, Demography, Entrepreneurship and Innovation, Cybersecurity, Software Engineering, Nutrition, Optometry, Mechanical Engineering",
+    disciplines: ["Ethics", "Philosophy"],
+    description:
+      "Provides access to five research programs (HINARI, AGORA, OARE, ARDI, and GOALI) supporting research in health, agriculture, environmental science, development, innovation, and law in developing countries.",
+    features: [
+      "Access to peer-reviewed journals",
+      "Global research collaboration",
+      "Thematic portals",
+      "Free/low-cost access for eligible institutions",
+    ],
+    subjects: ["Health", "Agriculture", "Environment", "Innovation", "Law"],
+    logo: "research.png",
+    url: "https://login.research4life.org/tacgw/login.cshtml",
+    color: "from-green-600 to-green-700",
+    stats: { programs: 5, institutions: "10,000+", countries: "120+" },
+  },
+  {
+      id: 22,
+      name: "Ajol",
+      category: "African Journals",
+      disciplines: ALL_DISCIPLINES,
+      description:
+          "African Journals Online (AJOL) hosts peer-reviewed academic journals from Africa, focused on African research across a wide range of disciplines.",
+      features: ["Open access journals", "African-focused content", "Health and social sciences", "Search and browse tools"],
+      subjects: ["Health", "Agriculture", "Social Sciences", "African Studies"],
+      logo: "AJOL.png",
+      url: "https://www.ajol.info/index.php/ajol",
+      color: "from-yellow-600 to-yellow-700",
+      stats: { journals: "500+", countries: "30+", disciplines: "10+" }
+  },
+  {
+    id: 24,
+    name: "DOAB",
+    category: "Open Access Books",
+    disciplines: ALL_DISCIPLINES,
+    description:
+      "The Directory of Open Access Books (DOAB) is a discovery service for open access, peer-reviewed books across a wide range of academic subjects.",
+    features: ["Free access", "Peer-reviewed books", "Multidisciplinary", "Search and browse tools"],
+    subjects: ["Humanities", "Social Sciences", "Science", "Technology", "Medicine"],
+    logo: "doab.png",
+    url: "https://doabooks.org/",
+    color: "from-pink-500 to-pink-900",
+    stats: { books: "60,000+", publishers: "600+", subjects: "30+" },
+  },
+  {
+    id: 25,
+    name: "DOAJ",
+    category: "Accounting, Marketing, Entrepreneurship and Innovation",
+    disciplines: ALL_DISCIPLINES,
+    description:
+      "The Directory of Open Access Journals (DOAJ) is an online index that provides access to high-quality, peer-reviewed open access journals from around the world.",
+    features: ["Free access", "Peer-reviewed journals", "Multidisciplinary", "Advanced search tools"],
+    subjects: ["Science", "Technology", "Medicine", "Social Sciences", "Humanities"],
+    logo: "DOAJ.png",
+    url: "https://doaj.org/",
+    color: "from-purple-600 to-pink-900",
+    stats: { journals: "20,000+", countries: "130+", disciplines: "15+" },
+  },
+  {
+    id: 20,
+    name: "OAPEN",
+    category: "Humanities & Social Sciences",
+    disciplines: ALL_DISCIPLINES,
+    description:
+      "Online library and publication platform for open access books, mainly in the fields of humanities and social sciences.",
+    features: ["Open access books", "Peer-reviewed", "Searchable catalog", "Multilingual content"],
+    subjects: ["Humanities", "Social Sciences", "Arts", "Cultural Studies", "History"],
+    logo: "open_Acc.png",
+    url: "https://oapen.org/",
+    color: "from-purple-600 to-purple-800",
+    stats: { books: "25,000+", publishers: "300+", languages: "15+" },
+  },
+  {
+    id: 35,
+    name: "CORE",
+    category: "Multidisciplinary, Open Access Research",
+    disciplines: ALL_DISCIPLINES,
+    description:
+      "The world's largest aggregator of open access research papers, harvesting full texts from thousands of institutional and subject repositories and journals worldwide.",
+    features: ["Full-text open access papers", "Repository aggregation", "Advanced search", "Free API & datasets"],
+    subjects: ["Theology & Religion", "Humanities", "Social Sciences", "Sciences", "Education"],
+    logo: "core.png",
+    url: "https://core.ac.uk/",
+    color: "from-blue-500 to-indigo-600",
+    stats: { papers: "300M+", fullTexts: "37M+", providers: "14,000+" },
+  },
+  {
+    id: 36,
+    name: "CCEL",
+    category: "Theology & Religious Studies",
+    disciplines: ["Biblical Studies", "Christian Theology", "Church History", "Missions", "Ethics", "Philosophy"],
+    description:
+      "The Christian Classics Ethereal Library offers free access to hundreds of classic Christian books, including works of the Church Fathers, reformers, theologians and devotional writers.",
+    features: ["Classic Christian texts", "Church Fathers collection", "Multiple download formats", "Bible & commentary tools"],
+    subjects: ["Theology", "Church History", "Biblical Studies", "Patristics", "Devotional Literature"],
+    logo: "ccel.png",
+    url: "https://www.ccel.org/",
+    color: "from-amber-600 to-amber-800",
+    stats: { books: "1,000+", authors: "500+", access: "Free" },
+  },
+  {
+    id: 4,
+    name: "HathiTrust Digital Library",
+    category: "Humanities & Social Sciences",
+    disciplines: ALL_DISCIPLINES,
+    description:
+      "A partnership of academic and research institutions, HathiTrust offers a collection of millions of titles digitized from libraries around the world, covering disciplines like history, literature, law, education, and more.",
+    features: ["Full-text search", "Digitized books and journals", "Public domain access", "Scholarly content"],
+    subjects: ["History", "Literature", "Law", "Arts", "Education", "Religion", "Social Sciences"],
+    logo: "hatii.png",
+    url: "https://www.hathitrust.org/",
+    color: "from-purple-500 to-purple-700",
+    stats: { books: "18M+", publicDomain: "7.5M+", partners: "80+" },
+  },
+  {
+    id: 37,
+    name: "DTL Open Access",
+    category: "Theology & Religious Studies",
+    disciplines: ALL_DISCIPLINES,
+    description:
+      "The Digital Theological Library's open access collection, a curated guide to freely available scholarly resources in religion and theology, including e-books, journals and archives.",
+    features: ["Curated open access content", "Theology-focused", "E-books & journals", "Subject research guides"],
+    subjects: ["Theology", "Religious Studies", "Biblical Studies", "Church History", "Ministry"],
+    logo: "dtl.png",
+    url: "https://libguides.thedtl.org/oadtl",
+    color: "from-indigo-600 to-purple-700",
+    stats: { resources: "Thousands", focus: "Religion", access: "Free" },
+  },
+  {
+    id: 38,
+    name: "BASE",
+    category: "Multidisciplinary, Academic Search Engine",
+    disciplines: ALL_DISCIPLINES,
+    description:
+      "Bielefeld Academic Search Engine (BASE) is one of the world's largest search engines for academic web resources, indexing open access documents from thousands of content providers.",
+    features: ["Open access filtering", "Advanced search", "Metadata from repositories", "Multilingual records"],
+    subjects: ["Theology & Religion", "Humanities", "Social Sciences", "Sciences", "Education"],
+    logo: "base.png",
+    url: "https://www.base-search.net/",
+    color: "from-sky-600 to-blue-800",
+    stats: { documents: "400M+", providers: "11,000+", openAccess: "60%+" },
+  },
+  {
+    id: 39,
+    name: "Internet Archive",
+    category: "Multidisciplinary, Digital Library",
+    disciplines: ALL_DISCIPLINES,
+    description:
+      "A non-profit digital library offering free access to millions of books, texts, audio recordings, videos and archived web pages, including many historical religious and theological works.",
+    features: ["Free book lending", "Historical texts", "Wayback Machine", "Audio & video collections"],
+    subjects: ["Religion", "History", "Literature", "Humanities", "General Reference"],
+    logo: "archive.png",
+    url: "https://archive.org/",
+    color: "from-gray-600 to-gray-800",
+    stats: { books: "40M+", webPages: "900B+", media: "15M+" },
+  },
+  // ---- Remaining resources ----
   {
     id: 2,
     name: "Science.gov",
     category: "Multidisciplinary, Mechanical Engineering",
+    disciplines: [],
     description:
       "A US government gateway offering one-stop access to 60+ scientific databases and over 2,200 portals across 13 federal science agencies, covering 200 million+ pages of research and technical information.",
     features: [
@@ -57,11 +230,11 @@ const databases = [
       agencies: "13+",
     },
   },
-
   {
     id: 3,
     name: "ERIC",
     category: "Education",
+    disciplines: [],
     description:
       "Topics in education, from early childhood education to higher education and special education, and includes both scholarly and grey literature.",
     features: ["Peer-reviewed articles", "Grey literature", "Full-text PDFs", "Advanced search tools"],
@@ -77,25 +250,11 @@ const databases = [
     color: "from-indigo-500 to-indigo-600",
     stats: { articles: "1.6M+", journals: "500+", reports: "300k+" },
   },
-
-  {
-    id: 4,
-    name: "HathiTrust Digital Library",
-    category: "Humanities & Social Sciences",
-    description:
-      "A partnership of academic and research institutions, HathiTrust offers a collection of millions of titles digitized from libraries around the world, covering disciplines like history, literature, law, education, and more.",
-    features: ["Full-text search", "Digitized books and journals", "Public domain access", "Scholarly content"],
-    subjects: ["History", "Literature", "Law", "Arts", "Education", "Religion", "Social Sciences"],
-    logo: "hatii.png",
-    url: "https://www.hathitrust.org/",
-    color: "from-purple-500 to-purple-700",
-    stats: { books: "18M+", publicDomain: "7.5M+", partners: "80+" },
-  },
-
   {
     id: 5,
     name: "arXiv",
     category: "Mechanical Engineering, Software Engineering, Cybersecurity",
+    disciplines: [],
     description:
       "An open-access archive for scholarly articles in physics, mathematics, computer science, quantitative biology, finance, and related fields, providing preprints freely available to the public before formal peer review.",
     features: ["Preprints", "Full-text access", "Daily updates", "Advanced search", "Open-access"],
@@ -113,11 +272,11 @@ const databases = [
     color: "from-pink-500 to-indigo-600",
     stats: { articles: "2.3M+", categories: "8+", subPerMonth: "15,000+" },
   },
-
   {
     id: 6,
     name: "UNdata",
     category: "Global Statistics, Demography",
+    disciplines: [],
     description:
       "A centralized gateway to statistical databases compiled by the United Nations and its agencies, covering demographics, economics, health, education, environment, and sustainable development worldwide.",
     features: ["International datasets", "Country profiles", "Time series data", "Visualizations", "Free access"],
@@ -127,23 +286,11 @@ const databases = [
     color: "from-indigo-700 to-blue-900",
     stats: { datasets: "60+", countries: "200+", indicators: "1,000+" },
   },
-  // {
-  //     id: 7,
-  //     name: "LawPavilion",  //     category: "Law & Legal Studies",
-  //     description:
-  //         "Nigeria's premier digital and offline legal research platform, offering access to a vast repository of case law, legislation, and legal analytics — trusted by courts, law firms, and institutions.",
-  //     features: ["Offline access", "Judicial precedents", "Legal analytics", "Case citation tools"],
-  //     subjects: ["Law", "Jurisprudence", "Constitutional Law", "Commercial Law", "Legal Practice"],
-  //     logo: "lawP.png",
-  //     url: "/restricted",
-  //     color: "from-indigo-700 to-indigo-800",
-  //     stats: { cases: "100k+", laws: "1,000+", courts: "Nigerian courts" },
-  // },
-
   {
     id: 8,
     name: "SSRN",
     category: "Sharia Law, Accounting, Treasury Management, Marketing, Taxation, Cybersecurity, Software Engineering, Nutrition, Optometry, Mechanical Engineering",
+    disciplines: ["Religious Studies", "Ethics", "Philosophy"],
     description:
       "Repository of working papers and forthcoming articles in a wide range of disciplines including economics, law, and health sciences.",
     features: ["Preprints", "Early research", "Downloadable papers", "Author profiles"],
@@ -157,6 +304,7 @@ const databases = [
     id: 9,
     name: "OAIster",
     category: "Sharia Law, Accounting, Treasury Management, Marketing, Taxation, Entrepreneurship and Innovation, Cybersecurity, Software Engineering, Nutrition, Optometry, Mechanical Engineering",
+    disciplines: ALL_DISCIPLINES,
     description:
       "Union catalog of millions of records representing open access resources worldwide, maintained by OCLC.",
     features: ["Open access", "Theses & dissertations", "Archival documents", "Multilingual records"],
@@ -170,6 +318,7 @@ const databases = [
     id: 10,
     name: "Europe PMC",
     category: "Life Sciences, Physiotherapy, Nutrition, Optometry",
+    disciplines: ["Ethics"],
     description: "European-based repository for life sciences articles, books, patents, and clinical guidelines.",
     features: ["Full-text access", "PubMed linkage", "Grant info", "Preprints"],
     subjects: ["Life Sciences", "Biomedical Sciences", "Medicine"],
@@ -182,6 +331,7 @@ const databases = [
     id: 11,
     name: "EconBiz",
     category: "Accounting, Treasury Management, Marketing, Taxation, Demography, Entrepreneurship and Innovation,",
+    disciplines: [],
     description:
       "Academic search portal for economics and business studies, offering access to articles, working papers, and journals.",
     features: ["Research articles", "Open access", "Working papers", "Conference papers"],
@@ -195,6 +345,7 @@ const databases = [
     id: 12,
     name: "CIA World Factbook",
     category: "Geopolitics & Statistics, Demography",
+    disciplines: [],
     description:
       "Comprehensive source of country data including geography, demographics, government, economy, and military.",
     features: ["Country profiles", "Statistical data", "Comparative rankings", "Interactive maps"],
@@ -208,6 +359,7 @@ const databases = [
     id: 13,
     name: "OATD",
     category: "Sharia Law, Accounting, Taxation, Software Engineering, Nutrition, Optometry, Mechanical Engineering",
+    disciplines: ALL_DISCIPLINES,
     description:
       "Index of graduate-level theses and dissertations freely available in full-text online from around the world.",
     features: ["Open access", "Graduate research", "Multilingual", "Global institutions"],
@@ -221,6 +373,7 @@ const databases = [
     id: 14,
     name: "NASA ADS",
     category: "Astronomy & Astrophysics",
+    disciplines: [],
     description: "Digital library for research in astronomy, astrophysics, and related fields, maintained by NASA.",
     features: ["Full-text PDFs", "Citation indexing", "Bibliographic tools", "Preprints"],
     subjects: ["Astronomy", "Astrophysics", "Space Science"],
@@ -233,6 +386,7 @@ const databases = [
     id: 15,
     name: "ScienceOpen",
     category: "Sharia Law, Entrepreneurship and Innovation, Cybersecurity, Software Engineering, Nutrition, Optometry, Mechanical Engineering",
+    disciplines: ["Religious Studies", "Ethics", "Philosophy"],
     description:
       "Research and publishing platform providing open access content and peer review across all areas of science.",
     features: ["Open access", "Peer review", "Research metrics", "Networking"],
@@ -246,6 +400,7 @@ const databases = [
     id: 16,
     name: "Project Gutenberg",
     category: "Literature & Humanities",
+    disciplines: ["Biblical Studies", "Christian Theology", "Church History", "Religious Studies", "Ethics", "Philosophy"],
     description:
       "Digital library of over 60,000 free eBooks, primarily consisting of classic literature, historical texts, and philosophy.",
     features: ["Free eBooks", "Classic literature", "Downloadable formats", "Public domain works"],
@@ -259,6 +414,7 @@ const databases = [
     id: 17,
     name: "Chronicling America",
     category: "History & Journalism",
+    disciplines: ["Church History"],
     description:
       "Historic American newspapers archive from the Library of Congress, offering access to digitized newspapers from 1789–1963.",
     features: ["Historic newspapers", "Searchable pages", "Archival materials", "Free access"],
@@ -272,6 +428,7 @@ const databases = [
     id: 18,
     name: "BioRxiv",
     category: "Biological Sciences",
+    disciplines: [],
     description: "Preprint server for biology, offering early access to research papers before peer review.",
     features: ["Preprints", "Early access", "Downloadable PDFs", "DOIs"],
     subjects: ["Biology", "Genetics", "Neuroscience", "Ecology", "Bioinformatics"],
@@ -284,6 +441,7 @@ const databases = [
     id: 19,
     name: "MedRxiv",
     category: "Health & Medical Sciences",
+    disciplines: [],
     description: "Preprint server for health sciences, providing early access to clinical and medical research papers.",
     features: ["Medical preprints", "Open access", "DOIs", "Updated versions"],
     subjects: ["Medicine", "Genetics", "Neuroscience", "Ecology", "Bioinformatics"],
@@ -293,53 +451,10 @@ const databases = [
     stats: { preprints: "40,000+", categories: "20+", updates: "Daily" },
   },
   {
-    id: 20,
-    name: "OAPEN",
-    category: "Humanities & Social Sciences",
-    description:
-      "Online library and publication platform for open access books, mainly in the fields of humanities and social sciences.",
-    features: ["Open access books", "Peer-reviewed", "Searchable catalog", "Multilingual content"],
-    subjects: ["Humanities", "Social Sciences", "Arts", "Cultural Studies", "History"],
-    logo: "open_Acc.png",
-    url: "https://oapen.org/",
-    color: "from-purple-600 to-purple-800",
-    stats: { books: "25,000+", publishers: "300+", languages: "15+" },
-  },
-  {
-    id: 21,
-    name: "Research4Life",
-    category: "Sharia Law, Accounting, Treasury Management, Marketing, Taxation, Demography, Entrepreneurship and Innovation, Cybersecurity, Software Engineering, Nutrition, Optometry, Mechanical Engineering",
-    description:
-      "Provides access to five research programs (HINARI, AGORA, OARE, ARDI, and GOALI) supporting research in health, agriculture, environmental science, development, innovation, and law in developing countries.",
-    features: [
-      "Access to peer-reviewed journals",
-      "Global research collaboration",
-      "Thematic portals",
-      "Free/low-cost access for eligible institutions",
-    ],
-    subjects: ["Health", "Agriculture", "Environment", "Innovation", "Law"],
-    logo: "research.png",
-    url: "https://login.research4life.org/tacgw/login.cshtml",
-    color: "from-green-600 to-green-700",
-    stats: { programs: 5, institutions: "10,000+", countries: "120+" },
-  },
-  {
-      id: 22,
-      name: "Ajol",
-      category: "African Journals",
-      description:
-          "African Journals Online (AJOL) hosts peer-reviewed academic journals from Africa, focused on African research across a wide range of disciplines.",
-      features: ["Open access journals", "African-focused content", "Health and social sciences", "Search and browse tools"],
-      subjects: ["Health", "Agriculture", "Social Sciences", "African Studies"],
-      logo: "AJOL.png",
-      url: "https://www.ajol.info/index.php/ajol",
-      color: "from-yellow-600 to-yellow-700",
-      stats: { journals: "500+", countries: "30+", disciplines: "10+" }
-  },
-  {
       id: 23,
       name: "EBSCO",
       category: "Multidisciplinary",
+      disciplines: ALL_DISCIPLINES,
       description:
           "A comprehensive research platform offering access to academic journals, magazines, books, and other resources across disciplines like biology, chemistry, engineering, physics, psychology, and religion.",
       features: ["Full-text journals", "Searchable databases", "Academic ebooks", "Research alerts"],
@@ -350,285 +465,259 @@ const databases = [
       stats: { articles: "15M+", journals: "2,000+", ebooks: "300k+" }
   },
   {
-    id: 24,
-    name: "DOAB",
-    category: "Open Access Books",
+    id: 26,
+    name: "Dietetics Academy",
+    category: "Nutrition / Dietetics Resource",
+    disciplines: [],
     description:
-      "The Directory of Open Access Books (DOAB) is a discovery service for open access, peer-reviewed books across a wide range of academic subjects.",
-    features: ["Free access", "Peer-reviewed books", "Multidisciplinary", "Search and browse tools"],
-    subjects: ["Humanities", "Social Sciences", "Science", "Technology", "Medicine"],
-    logo: "doab.png",
-    url: "http://www.doabooks.org",
-    color: "from-pink-500 to-pink-900",
-    stats: { books: "60,000+", publishers: "600+", subjects: "30+" },
-  },
-  {
-    id: 25,
-    name: "DOAJ",
-    category: "Accounting, Marketing, Entrepreneurship and Innovation",
-    description:
-      "The Directory of Open Access Journals (DOAJ) is an online index that provides access to high-quality, peer-reviewed open access journals from around the world.",
-    features: ["Free access", "Peer-reviewed journals", "Multidisciplinary", "Advanced search tools"],
-    subjects: ["Science", "Technology", "Medicine", "Social Sciences", "Humanities"],
-    logo: "DOAJ.png",
-    url: "http://www.doaj.org",
-    color: "from-purple-600 to-pink-900",
-    stats: { journals: "20,000+", countries: "130+", disciplines: "15+" },
-  },
-  {
-  id: 26,
-  name: "Dietetics Academy",
-  category: "Nutrition / Dietetics Resource",
-  description:
-    "Dietetics Academy offers a comprehensive, topic-wise collection of dietetics notes and resources across core nutrition, food science, public & clinical nutrition, and related subjects.",
-  features: [
-    "Topic-wise dietetics notes",
-    "Searchable content",
-    "Wide subject coverage (nutrition, food safety, research, etc.)",
-    "Free educational resource"
-  ],
-  subjects: [
-    "Nutritional Biochemistry",
-    "Food Science & Safety",
-    "Public & Clinical Nutrition",
-    "Research in Dietetics"
-  ],
-  logo: "Diet.PNG",
-  url: "https://dietetics.academy/",
-  color: "from-green-500 to-green-600",
-  stats: {
-    articles: "800+",
-    subjects: "9+",
-     books: "N/A",
-  }
-},
-{
-  id: 27,
-  name: "Socio Health",
-  category: "Health / Social Health Resource",
-  description:
-    "Socio Health is a platform focused on social determinants of health, equity, and related social-health issues.",
-  features: [
-    "Content on social determinants of health",
-    "Social health & equity focus",
-    "Articles / policy / research content",
-    "Resource on social & health intersection"
-  ],
-  subjects: [
-    "Social Determinants of Health",
-    "Health Equity",
-    "Public Health",
-    "Social Policy"
-  ],
-  logo: "Soc.PNG",
-  url: "https://socio.health/",
-  color: "from-blue-400 to-blue-600",
-  stats: {
-    articles: "1272",
-    subjects: "10",
-    courses: "37+"
-  }
-},
-{
-  id: 28,
-  name: "Free Medical Journals",
-  category: "Open Access Journal Aggregator",
-  description:
-    "Free Medical Journals (by Amedeo) provides free access / listings to over 4,000 medical journals, with alerts and journal updates.",
-  features: [
-    "Free access / listings to many medical journals",
-    "Daily updates on new journals",
-    "Journal alert / subscription service",
-    "Aggregated indexing"
-  ],
-  subjects: [
-    "Medicine",
-    "Clinical Health",
-    "Medical Research",
-    "Biomedical Sciences"
-  ],
-  logo: "free+.png",
-  url: "http://www.freemedicaljournals.com/",
-  color: "from-red-500 to-red-600",
-  stats: {
-    journals: "4000+",
-    updateFrequency: "Daily",
-    contentType: "Aggregator"
-  }
-},
-{
-  id: 29,
-  name: "HINARI",
-  category: "Accounting, Treasury Management, Marketing, Taxation, Demography, Entrepreneurship and Innovation, Cybersecurity, Software Engineering, Nutrition, Optometry, Mechanical Engineering, Physiotherapy",
-  description:
-    "HINARI (Health InterNetwork Access to Research Initiative) provides access to thousands of journals, books, and databases in biomedical and health sciences for institutions in low- and middle-income countries.",
-  features: [
-    "Access to thousands of health journals and e-books",
-    "Covers biomedical, nursing, and related sciences",
-    "Supports health institutions in developing countries",
-    "Part of the Research4Life partnership"
-  ],
-  subjects: [
-    "Medicine",
-    "Public Health",
-    "Biomedical Sciences",
-    "Clinical Research"
-  ],
-  logo: "Hin.PNG",
-  url: "https://www.research4life.org/about/programs/hinari/",
-  color: "from-teal-500 to-teal-600",
-  stats: {
-    journals: "16,000+",
-    books: "63,000+",
-    contentType: "Health"
-  }
-},
-{
-  id: 30,
-  name: "AGORA",
-  category: "Sharia Law, Accounting, Treasury Management, Marketing, Taxation, Demography, Entrepreneurship and Innovation, Cybersecurity, Software Engineering, Nutrition, Optometry, Mechanical Engineering, Physiotherapy",
-  description:
-    "AGORA (Access to Global Online Research in Agriculture) provides access to scientific research in agriculture, food, nutrition, environment, and related biological and social sciences for developing countries.",
-  features: [
-    "Thousands of journals and e-books in agriculture and food science",
-    "Supports agricultural and environmental research",
-    "FAO-managed under Research4Life",
-    "Access for developing country institutions"
-  ],
-  subjects: [
-    "Agriculture",
-    "Food Science",
-    "Environmental Science",
-    "Nutrition"
-  ],
-  logo: "Goa.PNG",
-  url: "https://www.fao.org/agora/",
-  color: "from-green-500 to-green-600",
-  stats: {
-    journals: "Thousands",
-    books: "Thousands",
-    contentType: "Agricultural"
-  }
-},
-{
-  id: 31,
-  name: "OARE",
-  category: "Environmental Research Access Program",
-  description:
-    "OARE (Online Access to Research in the Environment) offers access to research literature in environmental sciences and related disciplines, supporting sustainable development and environmental management.",
-  features: [
-    "Over 30,000 environmental journals",
-    "Access to scientific databases and reference works",
-    "Supports environmental and sustainability research",
-    "Part of the Research4Life initiative"
-  ],
-  subjects: [
-    "Environmental Science",
-    "Ecology",
-    "Sustainability",
-    "Earth Science",
-  ],
-  logo: "Oar.PNG",
-  url: "https://www.unep.org/topics/environment-under-review/digital-library/online-access-research-environment-oare",
-  color: "from-blue-500 to-blue-600",
-  stats: {
-    journals: "30,000+",
-    books: "130K+",
-    database: "20"
-  }
-},
-{
-  id: 32,
-  name: "ARDI",
-  category: "Science & Technology Research Access Program",
-  description:
-    "ARDI (Access to Research for Development and Innovation) provides access to scientific and technical literature to support research and innovation in developing countries, focusing on applied sciences and engineering.",
-  features: [
-    "Access to scientific and technical research journals",
-    "Supports innovation and development",
-    "Managed by WIPO under Research4Life",
-    "Focuses on applied science and technology"
-  ],
-  subjects: [
-    "Engineering",
-    "Technology",
-    "Applied Sciences",
-    "Innovation"
-  ],
-  logo: "Ard.PNG",
-  url: "https://www.wipo.int/en/web/ardi",
-  color: "from-orange-500 to-orange-600",
-  stats: {
-    journals: "1,000+",
-    books: "N/A",
-    publishers: "12"
-  }
-},
-{
-  id: 33,
-  name: "GOALI",
-  category: "Legal & Social Science Research Access Program",
-  description:
-    "GOALI (Global Online Access to Legal Information) provides access to academic legal information and research in law, social sciences, economics, and related disciplines for developing countries.",
-  features: [
-    "Access to legal and social science journals",
-    "Covers law, politics, economics, and philosophy",
-    "Supports education and justice sectors",
-    "Part of the Research4Life partnership"
-  ],
-  subjects: [
-    "Law",
-    "Social Sciences",
-    "Economics",
-    "Political Science",
-    "Accounting"
-  ],
-  logo: "Goali.PNG",
-  url: "https://www.research4life.org/goali/",
-  color: "from-purple-500 to-purple-600",
-  stats: {
-    journals: "2,000+",
-    books: "N/A",
-    contentType: "Legal"
-  }
-},
-
-{
-    id: 34,
-    name: "ScienceDirect",
-    category: "Accounting, Treasury Management, Marketing, Taxation, Demography, Cybersecurity, Software Engineering, Nutrition, Optometry, Physiotherapy",
-    description:
-        "Elsevier’s flagship platform for scientific, technical, and medical research — offering access to peer-reviewed journals, book chapters, and more across many disciplines.",
-    features: ["Full-text journals & articles", "Book chapters & reference works", "Advanced search & filtering", "Research topic pages / insights"],
-    subjects: ["Physical Sciences", "Engineering", "Life Sciences", "Health Sciences", "Social Sciences & Humanities"],
-    logo: "sciD.PNG",
-    url: "https://www.sciencedirect.com/",
+      "Dietetics Academy offers a comprehensive, topic-wise collection of dietetics notes and resources across core nutrition, food science, public & clinical nutrition, and related subjects.",
+    features: [
+      "Topic-wise dietetics notes",
+      "Searchable content",
+      "Wide subject coverage (nutrition, food safety, research, etc.)",
+      "Free educational resource"
+    ],
+    subjects: [
+      "Nutritional Biochemistry",
+      "Food Science & Safety",
+      "Public & Clinical Nutrition",
+      "Research in Dietetics"
+    ],
+    logo: "Diet.PNG",
+    url: "https://dietetics.academy/",
     color: "from-green-500 to-green-600",
-    stats: { articles: "18M+", journals: "4,000+", ebooks: "30,000+" }
-}
-
-
-
-
+    stats: {
+      articles: "800+",
+      subjects: "9+",
+       books: "N/A",
+    }
+  },
+  {
+    id: 27,
+    name: "Socio Health",
+    category: "Health / Social Health Resource",
+    disciplines: [],
+    description:
+      "Socio Health is a platform focused on social determinants of health, equity, and related social-health issues.",
+    features: [
+      "Content on social determinants of health",
+      "Social health & equity focus",
+      "Articles / policy / research content",
+      "Resource on social & health intersection"
+    ],
+    subjects: [
+      "Social Determinants of Health",
+      "Health Equity",
+      "Public Health",
+      "Social Policy"
+    ],
+    logo: "Soc.PNG",
+    url: "https://socio.health/",
+    color: "from-blue-400 to-blue-600",
+    stats: {
+      articles: "1272",
+      subjects: "10",
+      courses: "37+"
+    }
+  },
+  {
+    id: 28,
+    name: "Free Medical Journals",
+    category: "Open Access Journal Aggregator",
+    disciplines: [],
+    description:
+      "Free Medical Journals (by Amedeo) provides free access / listings to over 4,000 medical journals, with alerts and journal updates.",
+    features: [
+      "Free access / listings to many medical journals",
+      "Daily updates on new journals",
+      "Journal alert / subscription service",
+      "Aggregated indexing"
+    ],
+    subjects: [
+      "Medicine",
+      "Clinical Health",
+      "Medical Research",
+      "Biomedical Sciences"
+    ],
+    logo: "free+.png",
+    url: "http://www.freemedicaljournals.com/",
+    color: "from-red-500 to-red-600",
+    stats: {
+      journals: "4000+",
+      updateFrequency: "Daily",
+      contentType: "Aggregator"
+    }
+  },
+  {
+    id: 29,
+    name: "HINARI",
+    category: "Accounting, Treasury Management, Marketing, Taxation, Demography, Entrepreneurship and Innovation, Cybersecurity, Software Engineering, Nutrition, Optometry, Mechanical Engineering, Physiotherapy",
+    disciplines: ["Ethics"],
+    description:
+      "HINARI (Health InterNetwork Access to Research Initiative) provides access to thousands of journals, books, and databases in biomedical and health sciences for institutions in low- and middle-income countries.",
+    features: [
+      "Access to thousands of health journals and e-books",
+      "Covers biomedical, nursing, and related sciences",
+      "Supports health institutions in developing countries",
+      "Part of the Research4Life partnership"
+    ],
+    subjects: [
+      "Medicine",
+      "Public Health",
+      "Biomedical Sciences",
+      "Clinical Research"
+    ],
+    logo: "Hin.PNG",
+    url: "https://www.research4life.org/about/programs/hinari/",
+    color: "from-teal-500 to-teal-600",
+    stats: {
+      journals: "16,000+",
+      books: "63,000+",
+      contentType: "Health"
+    }
+  },
+  {
+    id: 30,
+    name: "AGORA",
+    category: "Sharia Law, Accounting, Treasury Management, Marketing, Taxation, Demography, Entrepreneurship and Innovation, Cybersecurity, Software Engineering, Nutrition, Optometry, Mechanical Engineering, Physiotherapy",
+    disciplines: [],
+    description:
+      "AGORA (Access to Global Online Research in Agriculture) provides access to scientific research in agriculture, food, nutrition, environment, and related biological and social sciences for developing countries.",
+    features: [
+      "Thousands of journals and e-books in agriculture and food science",
+      "Supports agricultural and environmental research",
+      "FAO-managed under Research4Life",
+      "Access for developing country institutions"
+    ],
+    subjects: [
+      "Agriculture",
+      "Food Science",
+      "Environmental Science",
+      "Nutrition"
+    ],
+    logo: "Goa.PNG",
+    url: "https://www.fao.org/agora/",
+    color: "from-green-500 to-green-600",
+    stats: {
+      journals: "Thousands",
+      books: "Thousands",
+      contentType: "Agricultural"
+    }
+  },
+  {
+    id: 31,
+    name: "OARE",
+    category: "Environmental Research Access Program",
+    disciplines: [],
+    description:
+      "OARE (Online Access to Research in the Environment) offers access to research literature in environmental sciences and related disciplines, supporting sustainable development and environmental management.",
+    features: [
+      "Over 30,000 environmental journals",
+      "Access to scientific databases and reference works",
+      "Supports environmental and sustainability research",
+      "Part of the Research4Life initiative"
+    ],
+    subjects: [
+      "Environmental Science",
+      "Ecology",
+      "Sustainability",
+      "Earth Science",
+    ],
+    logo: "Oar.PNG",
+    url: "https://www.unep.org/topics/environment-under-review/digital-library/online-access-research-environment-oare",
+    color: "from-blue-500 to-blue-600",
+    stats: {
+      journals: "30,000+",
+      books: "130K+",
+      database: "20"
+    }
+  },
+  {
+    id: 32,
+    name: "ARDI",
+    category: "Science & Technology Research Access Program",
+    disciplines: [],
+    description:
+      "ARDI (Access to Research for Development and Innovation) provides access to scientific and technical literature to support research and innovation in developing countries, focusing on applied sciences and engineering.",
+    features: [
+      "Access to scientific and technical research journals",
+      "Supports innovation and development",
+      "Managed by WIPO under Research4Life",
+      "Focuses on applied science and technology"
+    ],
+    subjects: [
+      "Engineering",
+      "Technology",
+      "Applied Sciences",
+      "Innovation"
+    ],
+    logo: "Ard.PNG",
+    url: "https://www.wipo.int/en/web/ardi",
+    color: "from-orange-500 to-orange-600",
+    stats: {
+      journals: "1,000+",
+      books: "N/A",
+      publishers: "12"
+    }
+  },
+  {
+    id: 33,
+    name: "GOALI",
+    category: "Legal & Social Science Research Access Program",
+    disciplines: ["Ethics", "Philosophy"],
+    description:
+      "GOALI (Global Online Access to Legal Information) provides access to academic legal information and research in law, social sciences, economics, and related disciplines for developing countries.",
+    features: [
+      "Access to legal and social science journals",
+      "Covers law, politics, economics, and philosophy",
+      "Supports education and justice sectors",
+      "Part of the Research4Life partnership"
+    ],
+    subjects: [
+      "Law",
+      "Social Sciences",
+      "Economics",
+      "Political Science",
+      "Accounting"
+    ],
+    logo: "Goali.PNG",
+    url: "https://www.research4life.org/goali/",
+    color: "from-purple-500 to-purple-600",
+    stats: {
+      journals: "2,000+",
+      books: "N/A",
+      contentType: "Legal"
+    }
+  },
+  {
+      id: 34,
+      name: "ScienceDirect",
+      category: "Accounting, Treasury Management, Marketing, Taxation, Demography, Cybersecurity, Software Engineering, Nutrition, Optometry, Physiotherapy",
+      disciplines: ["Religious Studies", "Ethics", "Philosophy"],
+      description:
+          "Elsevier’s flagship platform for scientific, technical, and medical research — offering access to peer-reviewed journals, book chapters, and more across many disciplines.",
+      features: ["Full-text journals & articles", "Book chapters & reference works", "Advanced search & filtering", "Research topic pages / insights"],
+      subjects: ["Physical Sciences", "Engineering", "Life Sciences", "Health Sciences", "Social Sciences & Humanities"],
+      logo: "sciD.PNG",
+      url: "https://www.sciencedirect.com/",
+      color: "from-green-500 to-green-600",
+      stats: { articles: "18M+", journals: "4,000+", ebooks: "30,000+" }
+  },
+  // {
+  //     id: 7,
+  //     name: "LawPavilion",  //     category: "Law & Legal Studies",
+  //     description:
+  //         "Nigeria's premier digital and offline legal research platform, offering access to a vast repository of case law, legislation, and legal analytics — trusted by courts, law firms, and institutions.",
+  //     features: ["Offline access", "Judicial precedents", "Legal analytics", "Case citation tools"],
+  //     subjects: ["Law", "Jurisprudence", "Constitutional Law", "Commercial Law", "Legal Practice"],
+  //     logo: "lawP.png",
+  //     url: "/restricted",
+  //     color: "from-indigo-700 to-indigo-800",
+  //     stats: { cases: "100k+", laws: "1,000+", courts: "Nigerian courts" },
+  // },
 ]
 
-const categories = [
-  "All",
-  "Accounting",
-  "Treasury Management",
-  "Criminology",
-  "Marketing",
-  "Taxation",
-  "Sharia Law",
-  "Demography",
-  "Entrepreneurship and Innovation",
-  "Physiotherapy",
-  "Cybersecurity",
-  "Software Engineering",
-  "Nutrition",
-  "Optometry",
-  "Mechanical",
-]
+const categories = ["All", ...ALL_DISCIPLINES]
 
 type Resource = (typeof databases)[number]
 
@@ -656,13 +745,9 @@ export default function EResourcesPage() {
   })
 
   const filteredDatabases = databases.filter((db) => {
-    const category = selectedCategory.toLowerCase()
     const term = searchTerm.toLowerCase()
 
-    const matchesCategory =
-      selectedCategory === "All" ||
-      db.category.toLowerCase().includes(category) ||
-      db.subjects.some((subject) => subject.toLowerCase().includes(category))
+    const matchesCategory = selectedCategory === "All" || (db.disciplines as string[]).includes(selectedCategory)
 
     const matchesSearch =
       db.name.toLowerCase().includes(term) ||
@@ -807,7 +892,7 @@ export default function EResourcesPage() {
           <div className="flex flex-col sm:flex-row sm:items-end sm:justify-between gap-2 mb-4">
             <div>
               <h2 className="text-2xl font-semibold tracking-tight text-navy">Browse databases</h2>
-              <p className="text-sm text-muted-foreground">Filter by programme or search above</p>
+              <p className="text-sm text-muted-foreground">Filter by discipline or search above</p>
             </div>
             <p className="text-sm text-muted-foreground">
               Showing <span className="font-semibold text-navy">{filteredDatabases.length}</span>{" "}
@@ -867,7 +952,7 @@ export default function EResourcesPage() {
               <Database className="h-7 w-7 text-navy-400" />
             </div>
             <h3 className="text-xl font-semibold text-navy mb-2">No databases found</h3>
-            <p className="text-muted-foreground mb-6">Try a different search term or programme.</p>
+            <p className="text-muted-foreground mb-6">Try a different search term or discipline.</p>
             <Button onClick={clearFilters} className="rounded-xl bg-navy px-5 hover:bg-navy-700 text-white">
               Clear filters
             </Button>
