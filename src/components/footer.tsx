@@ -4,7 +4,7 @@ import Image from "next/image"
 import { ExternalLink } from "lucide-react"
 
 const links = [
-  { name: "University Website", href: "https://www.immanuelcollege.edu.ng/" },
+  { name: "College Website", href: "https://www.immanuelcollege.edu.ng/" },
 ]
 
 export default function Footer() {

@@ -794,7 +794,7 @@ export default function EResourcesPage() {
             rel="noopener noreferrer"
             className="inline-flex shrink-0 items-center gap-1.5 rounded-full border border-gold/40 bg-gold/10 px-3 sm:px-4 py-2 text-xs sm:text-sm font-medium text-gold-100 transition-colors hover:bg-gold hover:text-navy hover:border-gold"
           >
-            University Website
+            College Website
             <ExternalLink className="h-3.5 w-3.5" />
           </a>
         </div>
